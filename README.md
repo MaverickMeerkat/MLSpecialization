@@ -4,11 +4,12 @@ Coursera Machine Learning Specialization (Andrew Ng) course exercises
 
 https://www.coursera.org/specializations/deep-learning
 
-Note that due to the explicit request in the Code of Honor, not to post solutions in GitHub, I will not (as of now)
-post the actual solutions - but will post either related/adapted stuff, or solutions for the ungraded and optional parts.
+Note that due to the explicit request in the Code of Honor not to post solutions on GitHub, I will not (as of now)
+post the solutions for the graded exercises - but will post rather related/adapted stuff, or solutions for the ungraded
+optional parts.
 
-The graded exercises themselves are quite easy, so it shouldn't be a problem - and you can use the forums/discussion
-boards to ask for help.
+The graded exercises themselves are quite easy, so it shouldn't be much of a problem - and you can use the forums or
+discussion boards to ask for help.
 
 ## Course 1 - Neural Networks and Deep Learning
 
