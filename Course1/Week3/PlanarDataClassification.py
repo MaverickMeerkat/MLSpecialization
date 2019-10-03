@@ -1,10 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
-# from testCases_v2 import *
 import sklearn
-# import sklearn.datasets
-# import sklearn.linear_model
 import tensorflow as tf
 
 from Course1.Week3.planar_utils import plot_decision_boundary, sigmoid, load_planar_dataset, load_blobs_dataset, \

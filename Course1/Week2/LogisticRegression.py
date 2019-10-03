@@ -23,9 +23,10 @@ train_set_x, test_set_x = process_dataset(train_set_x_orig, test_set_x_orig)
 train_set_y = train_set_y.T
 test_set_y = test_set_y.T
 
-# The original exercise is creating logistic regression from the ground up
+# The original exercise is creating logistic regression from the grounds (using only numpy)
 # Here I will use Keras sequential and functional API
 
+# There is no regular gradient descent in Keras, so I will use Adam
 adam = optimizers.Adam(lr=0.009)
 
 # Keras Sequential
@@ -39,13 +40,13 @@ def sequential(input_shape):
     return model
 
 
-# model = sequential((train_set_x.shape[1],))
-# model.fit(train_set_x, train_set_y, epochs=200, verbose=2)
-# Y_prediction_train = model.predict(train_set_x)
-# Y_prediction_test = model.predict(test_set_x)
-# _, train_score = model.evaluate(train_set_x, train_set_y)
-# _, test_score = model.evaluate(test_set_x, test_set_y)
-# print(f'train accuracy: {train_score}; test accuracy: {test_score}')
+model = sequential((train_set_x.shape[1],))
+model.fit(train_set_x, train_set_y, epochs=200, verbose=2)
+Y_prediction_train = (model.predict(train_set_x) > 0.5) * 1
+Y_prediction_test = (model.predict(test_set_x) > 0.5) * 1
+_, train_score = model.evaluate(train_set_x, train_set_y)
+_, test_score = model.evaluate(test_set_x, test_set_y)
+print(f'train accuracy: {train_score}; test accuracy: {test_score}')
 
 
 # Keras Functional
@@ -61,7 +62,7 @@ def functional(shape):
 
 model = functional((train_set_x.shape[1],))
 history = model.fit(train_set_x, train_set_y, epochs=100, verbose=2)  # batch_size = m_train
-Y_prediction_train = (model.predict(train_set_x) > 0.5) * 1
+Y_prediction_train = (model.predict(train_set_x) > 0.5) * 1  # *1 to convert boolean to int
 Y_prediction_test = (model.predict(test_set_x) > 0.5) * 1
 _, train_score = model.evaluate(train_set_x, train_set_y)
 _, test_score = model.evaluate(test_set_x, test_set_y)
