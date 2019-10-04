@@ -40,14 +40,15 @@ def forward_pass(X, params, architecture):
 
 def cost(h, y):
     '''
-    Cross entropy cost / log loss
+    Cross entropy cost / log loss, w/o regularization
+    In practice this is not used in the backprop algorithm, as we use a heuristic for its gradient
     :param h: hypothesis output, y-hat, final activation a
     :param y: true values
     :return:
     '''
     m = y.shape[1]
     cost = (-1 / m) * (y @ np.log(h).T + (1 - y) @ np.log(1 - h).T)
-    return cost
+    return np.squeeze(cost)
 
 
 def backward_pass(da, caches):
@@ -70,29 +71,34 @@ def update_weights(params, gradients, lr=0.01):
         params[i]['b'] -= lr * gradients[i]['db']
 
 
-def initalize_parameters(n_x, m, architecture):
+def initalize_parameters(n_x, architecture):
+    np.random.seed(1)  # this really seems to have huge affect on the convergence of the cost function
     params = []
     n_l_0 = n_x
     for i in range(len(architecture)):
         n_l_1, activation = architecture[i]
-        W = np.random.randn(n_l_1, n_l_0) * np.sqrt(2 / n_l_0)  # Xaviar initialization
+        W = np.random.randn(n_l_1, n_l_0) * np.sqrt(1 / n_l_0)  # Xaviar initialization
         b = np.zeros((n_l_1, 1))
         params.append({'W': W, 'b': b})
         n_l_0 = n_l_1
     return params
 
 
-def dnn_model(X, y, architecture, iter=1000):
-    params = initalize_parameters(X.shape[0], X.shape[1], architecture)
+def dnn_model(X, y, architecture, iter=1000, learning_rate=0.0075, decay=0.001):
+    params = initalize_parameters(X.shape[0], architecture)
+    losses = []
     for i in range(iter):
         a, caches = forward_pass(X, params, architecture)
         l = cost(a, y)
         da = - (np.divide(y, a) - np.divide(1 - y, 1 - a))  # Heuristic for log loss
         gradients = backward_pass(da, caches)
-        update_weights(params, gradients)
+        lr = learning_rate/(1+decay*i)  # learning rate decay
+        update_weights(params, gradients, lr=lr)
         if i % 100 == 0:
             acc = accuracy(X, architecture, params, y)
-            print(f'loss: {l} | accuracy {acc}')
+            print(f'iteration - {i}  -  loss: {l} | accuracy {acc}')
+            losses.append(l)
+    return params, losses
 
 
 def accuracy(X, architecture, params, y):

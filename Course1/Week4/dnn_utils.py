@@ -21,7 +21,7 @@ def sigmoid_back(da, z):
 
 
 def tanh_back(da, z):
-    da * (1 - tanh(z)**2)
+    return da * (1 - tanh(z)**2)
 
 
 def relu_back(da, z):
@@ -33,9 +33,6 @@ def relu_back(da, z):
 MAPPING = {sigmoid: sigmoid_back,
            relu: relu_back,
            tanh: tanh_back}
-#
-# x = MAPPING[sigmoid]
-# i = 1
 
 
 def load_data():
@@ -53,3 +50,24 @@ def load_data():
     test_set_y_orig = test_set_y_orig.reshape((1, test_set_y_orig.shape[0]))
 
     return train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
+
+
+def save_weights(weights):
+    hf = h5py.File('./weights.h5', 'w')
+    i = 0
+    for w in weights:
+        hf.create_dataset(f'weights_W_{i}', data=w['W'])
+        hf.create_dataset(f'weights_b_{i}', data=w['b'])
+        i += 1
+    hf.close()
+
+
+
+def load_weights():
+    hf = h5py.File('./weights.h5', 'r')
+    weights = []
+    for i in range(len(hf.keys())//2):
+        W = np.array(hf.get(f'weights_W_{i}'))
+        b = np.array(hf.get(f'weights_b_{i}'))
+        weights.append({'W': W, 'b': b})
+    return weights
