@@ -10,7 +10,7 @@ from Course1.Week3.planar_utils import plot_decision_boundary, sigmoid, load_pla
 np.random.seed(1)
 
 # Load data
-X, Y = load_gaussian_quantiles_dataset()
+X, Y = load_planar_dataset()
 # Visualize the data:
 plt.scatter(X[0, :], X[1, :], c=np.squeeze(Y), s=20, cmap=plt.cm.Spectral)
 plt.show()
@@ -44,7 +44,7 @@ def nn_model(X, Y, n_h, epochs=1000, print_cost=False):
 
     # loss, optimizer & metric
     loss = tf.losses.log_loss(tf_y, output)
-    optimizer = tf.train.AdamOptimizer(learning_rate=0.1)
+    optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.1)
     train_op = optimizer.minimize(loss)
     accuracy, update_op = tf.metrics.accuracy(labels=tf_y, predictions=(output > 0.5))
 
