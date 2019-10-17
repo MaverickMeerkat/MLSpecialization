@@ -8,9 +8,7 @@ from Course4.Week1.ConvNet import ConvNet
 
 
 # Exercise uses TF - we will use the implementations in the first exercise
-# Note this is unbelievably slow...
-
-# Ex1 (Numpy) Implementation
+# Note this is quite slow...
 
 def load_dataset():
     train_dataset = h5py.File('datasets/train_signs.h5', "r")

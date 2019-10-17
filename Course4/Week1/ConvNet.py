@@ -65,8 +65,8 @@ class ConvNet(object):
 
     def cost(self, h, y, lambd):
         '''
-        Cross entropy cost / log loss, w/ regularization
-        In practice this is not used in the backprop algorithm, as we use a heuristic for its gradient
+        Softmax loss, w/ regularization
+        In practice this is not used in the backprop algorithm, as we use a heuristic for its derivative
         :param h: hypothesis output, y-hat, final activation a
         :param y: true values
         :return:
@@ -81,7 +81,6 @@ class ConvNet(object):
             cost_w += (lambd / (2 * m)) * np.sum(w ** 2)
         loss = (1 / m) * np.sum(-np.log(h[np.arange(m), np.argmax(y, axis=1)]))
         return np.squeeze(loss)
-
 
     def backward_pass(self, da, caches, lambd):
         m = da.shape[0]
@@ -125,7 +124,7 @@ class ConvNet(object):
     def forward_pass(self, X):
         '''
         Make a forward pass in a NN
-        :param X: n_x by m matrix
+        :param X: (m, n_W, n_H, n_C) matrix
         :return:
         '''
         np.random.seed(1)

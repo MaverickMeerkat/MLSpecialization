@@ -38,9 +38,22 @@ def softmax_back(da, z):
     # z, da shapes - (m, n)
     m, n = z.shape
     p = softmax(z)
+    # First we create for each example feature vector, it's outer product with itself
+    # ( p1^2  p1*p2  p1*p3 .... )
+    # ( p2*p1 p2^2   p2*p3 .... )
+    # ( ...                     )
     tensor1 = np.einsum('ij,ik->ijk', p, p)  # (m, n, n)
+    # Second we need to create an (n,n) identity of the feature vector
+    # ( p1  0  0  ...  )
+    # ( 0   p2 0  ...  )
+    # ( ...            )
     tensor2 = np.einsum('ij,jk->ijk', p, np.eye(n, n))  # (m, n, n)
+    # Then we need to subtract the first tensor from the second
+    # ( p1 - p1^2   -p1*p2   -p1*p3  ... )
+    # ( -p1*p2     p2 - p2^2   -p2*p3 ...)
+    # ( ...                              )
     dSoftmax = tensor2 - tensor1
+    # Finally, we multiply the dSoftmax (da/dz) by da (dL/da) to get the gradient w.r.t. Z
     dz = np.einsum('ijk,ik->ij', dSoftmax, da)  # (m, n)
     return dz
 
