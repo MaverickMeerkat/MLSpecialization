@@ -13,11 +13,43 @@ discussion boards to ask for help.
 
 ## Course 1 - Neural Networks and Deep Learning
 
+Week 2 - used both Keras sequential and functional API to implement logistic regression
+
+Week 3 - used TensorFlow to implement a regular NN
+
+Week 4 - used a variation of the DNN shown in the exercise
+
 ## Course 2 - Improving Deep Neural Networks
 ###  Hyperparameter tuning, Regularization and Optimization
 
+Week 1 - Uses OOP design, which allows for both L2 regularization and Dropout; Unlike exercise, both are supported
+simultaneously
+
+Week 2 - Extended the DNNClass in week 1 to support mini batches, momentum and RMS prop (aka Adam)
+
+Week 3 - In the first part I used Hyperparameter search; in the 2nd part I extended DNNClass to support batch
+normalization
+
 ## Course 3 - Structuring Machine Learning Projects
+
+TODO: think of possible ways to implement the learning material
 
 ## Course 4 - Convolutional Neural Networks (CNN's)
 
+Week 1 - the 1st exercise implements conv-nets forward prop and (optional) back prop, and then the 2nd exercise uses
+tensorflow to create a network. Instead - I implemented the entire network just with numpy. It runs really slow, but the
+logic should be correct.
+
+Week 2 - TODO
+
+Week 3 - TODO
+
+Week 4 - TODO
+
 ## Course 5 - Sequence Models (RNN's)
+
+Week 1 - TODO
+
+Week 2 - TODO
+
+Week 3 - TODO
