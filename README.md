@@ -56,9 +56,21 @@ Week 2 - Implements ResNets in TensorFlow instead of Keras.
 Note an important confusion: specifying Batch Normalization axis in Keras, is opposite to how it works in NumPy. The
 axis you specify in Keras is actually the axis which is not in the calculations!
 
-Week 3 - TODO
+Work in Progress...
 
-Week 4 - TODO
+Week 3 - WIP
+
+Download yolo weights from https://pjreddie.com/darknet/yolo/
+
+Week 4 - combined NST with FaceNet. Download the pre-trained model:
+https://github.com/nhbond/facenet-resources/tree/master/models
+
+Note that FaceNet is used to create embedding (some latent space representation) of faces. What I tried to do is combine
+this with Neural-Style-Transfer, and called it Ultrame (the idea is to turn all faces more into me).
+
+Ultrame1 is a bit of a messy notebook, but Ultrame2 is more detailed.
+
+So far results have been quite disappointing. But this was just a few hours of work.
 
 ## Course 5 - Sequence Models (RNN's)
 
