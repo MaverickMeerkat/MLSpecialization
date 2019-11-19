@@ -74,7 +74,7 @@ So far results have been quite disappointing. But this was just a few hours of w
 
 ## Course 5 - Sequence Models (RNN's)
 
-Week 1 - TODO
+Week 1 - Using Keras instead of the numpy built RNN to generate Dino's names
 
 Week 2 - TODO
 
